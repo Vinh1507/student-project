@@ -3,13 +3,9 @@ version: '3'
 services:
   web_api:
     build: ./student-django
-    # restart: always
     command: uwsgi --ini uwsgi.ini
-    # command: uwsgi --socket :8000 --module student_api.wsgi --chmod-socket=666
     volumes:
       - ./student-django:/app
-    ports:
-      - 8000:8000
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -17,11 +13,12 @@ services:
     depends_on:
       - db  
   django_nginx:
-    build: ./django-nginx
+    image: nginx
     ports: 
       - 8002:8002
     volumes:
       - ./student-django:/docker_api
+      - ./django-nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./django-nginx/logs:/var/log/nginx
     depends_on:
       - web_api
