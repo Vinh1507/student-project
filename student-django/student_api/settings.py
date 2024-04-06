@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'backendserver',
-    'localhost'
+    'localhost',
+    'db',
+    '127.0.0.1'
 ]
 
 
@@ -87,7 +89,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'student-project-db-1',
+        'HOST': 'db',
         'PORT': '5432',
     }
     # 'default': {

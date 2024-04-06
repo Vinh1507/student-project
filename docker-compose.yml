@@ -3,7 +3,9 @@ version: '3'
 services:
   web_api:
     build: ./student-django
-    command: uwsgi --socket :8000 --module student_api.wsgi --chmod-socket=666
+    # restart: always
+    command: uwsgi --ini uwsgi.ini
+    # command: uwsgi --socket :8000 --module student_api.wsgi --chmod-socket=666
     volumes:
       - ./student-django:/app
     ports:
@@ -15,15 +17,11 @@ services:
     depends_on:
       - db  
   django_nginx:
-    image: nginx
+    build: ./django-nginx
     ports: 
       - 8002:8002
     volumes:
-      - ./student-django/static:/usr/share/student-django/static
-      - ./student-django/media:/usr/share/student-django/media
-      - ./student-django/uwsgi_params:/usr/share/student-django/uwsgi_params
-      - ./student-django/student_api.sock:/usr/share/student-django/student_api.sock
-      - ./django-nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./student-django:/docker_api
       - ./django-nginx/logs:/var/log/nginx
     depends_on:
       - web_api
