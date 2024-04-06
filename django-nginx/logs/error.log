@@ -119,3 +119,5 @@
 2024/04/05 18:19:23 [emerg] 1#1: open() "/docker_api/uwsgi_params" failed (2: No such file or directory) in /etc/nginx/sites-available/student_api.conf:23
 2024/04/05 18:20:09 [emerg] 1#1: open() "/docker_api/uwsgi_params" failed (2: No such file or directory) in /etc/nginx/sites-available/student_api.conf:23
 2024/04/05 18:21:24 [emerg] 1#1: open() "/docker_api/uwsgi_params" failed (2: No such file or directory) in /etc/nginx/sites-available/student_api.conf:23
+2024/04/06 05:31:00 [error] 25#25: *1 connect() to unix:/docker_api/student_api.sock failed (111: Connection refused) while connecting to upstream, client: 172.24.0.1, server: localhost, request: "GET /api/students/?query= HTTP/1.1", upstream: "uwsgi://unix:/docker_api/student_api.sock:", host: "localhost:8002", referrer: "http://localhost:82/"
+2024/04/06 05:40:11 [emerg] 1#1: open() "/docker_api/uwsgi_params" failed (2: No such file or directory) in /etc/nginx/nginx.conf:35
