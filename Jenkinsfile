@@ -9,7 +9,7 @@ pipeline {
         stage('Clone') {
             steps {
                 script {
-                    echo 'vinhbh start...'
+                    echo 'vinhbh start.....'
                     // Clone code from a specific branch
                     git branch: 'main', url: 'https://github.com/Vinh1507/student-project'
                 }
