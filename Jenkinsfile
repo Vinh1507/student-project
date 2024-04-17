@@ -9,7 +9,7 @@ pipeline {
         stage('Clone') {
             steps {
                 script {
-                    echo 'update'
+                    echo 'update 2'
                     // Clone code from a specific branch
                     git branch: 'main', url: 'https://github.com/Vinh1507/student-project'
                 }
