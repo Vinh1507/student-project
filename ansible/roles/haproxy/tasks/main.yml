@@ -1,0 +1,21 @@
+---
+- name: Install HAProxy
+  apt:
+    name: haproxy
+    state: present
+
+- name: Copy HAProxy configuration file
+  copy:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+    force: yes
+  changed_when: true
+  notify: restart haproxy
+
+- name: Ensure HAProxy service is enabled and started
+  service:
+    name: haproxy
+    state: started
+    enabled: yes
+  changed_when: true
+  notify: restart haproxy

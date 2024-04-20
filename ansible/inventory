@@ -1,0 +1,14 @@
+[db_servers]
+192.168.144.129
+
+[web_clients]
+192.168.144.132
+192.168.144.133
+
+[web_servers]
+192.168.144.130
+192.168.144.131
+
+[lb]
+192.168.144.132 config_file=keepalived_master.conf
+192.168.144.133 config_file=keepalived_backup.conf

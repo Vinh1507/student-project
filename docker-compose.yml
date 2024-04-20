@@ -10,8 +10,6 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    depends_on:
-      - db  
   django_nginx:
     image: nginx
     ports: 

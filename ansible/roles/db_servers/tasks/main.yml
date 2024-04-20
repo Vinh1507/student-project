@@ -1,0 +1,20 @@
+- name: Remove directory
+  file:
+    path: /db-server          
+    state: absent
+
+- name: Create directory db-server
+  file:
+    path: /db-server     
+    state: directory
+    mode: '0755'
+
+- name: Copy student-db directory
+  copy:
+    src: student-db
+    dest: /db-server
+         
+- name: Run Docker Compose
+  shell: sudo docker compose up -d
+  args:
+    chdir: /db-server/student-db

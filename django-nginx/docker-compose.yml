@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  web_api:
+    build: ../student-django
+    container_name: web_api
+    command: uwsgi --ini uwsgi.ini
+    volumes:
+      - ../student-django:/app
+    environment:
+      - DATABASE_NAME=postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_HOST=192.168.144.129
+      - DATABASE_PORT=5432
+  django_nginx:
+    image: nginx
+    container_name: django_nginx
+    ports: 
+      - 8002:8002
+    volumes:
+      - ../student-django:/docker_api
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./logs:/var/log/nginx

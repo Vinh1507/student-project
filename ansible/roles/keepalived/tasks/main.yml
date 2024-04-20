@@ -1,0 +1,21 @@
+---
+- name: Install Keepalived
+  apt:
+    name: keepalived
+    state: present
+
+- name: Copy keepalived configuration file
+  copy:
+    src: "{{ config_file }}"
+    dest: /etc/keepalived/keepalived.conf
+    force: yes
+  changed_when: true
+  notify: restart_keepalived
+
+- name: Ensure Keepalived service is enabled and started
+  service:
+    name: keepalived
+    state: started
+    enabled: yes
+  changed_when: true
+  notify: restart_keepalived
