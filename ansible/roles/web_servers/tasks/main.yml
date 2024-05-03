@@ -15,12 +15,17 @@
     src: django-nginx
     dest: /api-project  
 
-- name: Copy student-django directory
-  copy:
-    src: student-django
-    dest: /api-project           
+# - name: Copy student-django directory
+#   copy:
+#     src: student-django
+#     dest: /api-project           
 
-- name: Run Docker Compose
+- name: Run Docker Compose Down
+  shell: sudo docker compose down
+  args:
+    chdir: /api-project/django-nginx
+
+- name: Run Docker Compose Up
   shell: sudo docker compose up -d
   args:
     chdir: /api-project/django-nginx
