@@ -15,7 +15,7 @@ pipeline {
                 }
                 script {
                     def tagVersion = sh(script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
-                    env.TAG_NAME = tag
+                    env.TAG_NAME = tagVersion
                     echo "Tag version: ${env.TAG_NAME}"
                 }
             }
