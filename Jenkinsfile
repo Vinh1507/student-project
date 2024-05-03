@@ -9,9 +9,18 @@ pipeline {
         stage('Clone') {
             steps {
                 script {
-                    echo 'Clone code from branch create-ansible-cd (trigger v3)'
+                    echo 'Clone code from branch create-ansible-cd (trigger v4)'
                     // Clone code from a specific branch
                     git branch: 'create-ansible-cd', url: 'https://github.com/Vinh1507/student-project'
+                }
+            }
+        }
+        stage('Get Tag Version') {
+            steps {
+                script {
+                    def tagVersion = sh(script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
+                    echo "Tag version: ${tagVersion}"
+                    TAG_NAME = tagVersion
                 }
             }
         }
