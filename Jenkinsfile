@@ -38,11 +38,13 @@ pipeline {
                 sh "docker push ${env.IMAGE_NAME}:${tagVersion}"
             }
         }
-        stage('Execute Ansible Playbook') {
+        stage('Run Sed') {
             steps {
-                echo 'Run sed to inject '
+                echo 'Run sed to inject'
                 sh "sed -i 's/DJANGO_IMAGE_VERSION=.*/DJANGO_IMAGE_VERSION=${tagVersion}/g' ${DJANGO_NGINX_DOCKER_COMPOSE_FILE_PATH}"
             }
+        }
+        stage('Execute Ansible Playbook') {
             steps {
                 ansiblePlaybook credentialsId: 'ansible-private-key', disableHostKeyChecking: true, installation: 'ansible2', inventory: './ansible/inventory.yml', playbook: './ansible/playbooks/ansible.yml', vaultTmpPath: ''
             }
