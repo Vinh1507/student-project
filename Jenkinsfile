@@ -33,5 +33,10 @@ pipeline {
                 sh "docker push ${env.IMAGE_NAME}:${env.TAG_NAME}"
             }
         }
+        stage('Execute Ansible Playbook') {
+            steps {
+                ansiblePlaybook credentialsId: 'ansible-private-key', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'inventory', playbook: '/playbooks/ansible.yml', vaultTmpPath: ''
+            }
+        }
     }
 }
