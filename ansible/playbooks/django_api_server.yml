@@ -1,0 +1,15 @@
+---
+
+- hosts: web_servers
+  become: true
+  tasks:
+  - name: update repository index (Ubuntu)
+    apt:
+      update_cache: true
+    when: ansible_distribution == "Ubuntu"
+    
+- hosts: web_servers
+  become: true
+  roles:
+    - role: ../roles/web_servers
+      when: hostvars[inventory_hostname].name == web_server_name
