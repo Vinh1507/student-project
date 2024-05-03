@@ -18,9 +18,8 @@ pipeline {
         stage('Get Tag Version') {
             steps {
                 script {
-                    def tagVersion = sh(script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
-                    echo "Tag version: ${tagVersion}"
-                    TAG_NAME = tagVersion
+                    env.TAG_NAME = sh(script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
+                    echo "Tag version: ${env.TAG_NAME}"
                 }
             }
         }
