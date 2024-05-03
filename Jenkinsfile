@@ -43,7 +43,7 @@ pipeline {
         stage('Run Sed') {
             steps {
                 echo 'Run sed to inject'
-                sh "sed 's/{{DJANGO_IMAGE_VERSION}}/${env.TAG_NAME}/g' ${DJANGO_NGINX_DOCKER_COMPOSE_FILE_PATH}"
+                sh "sed -i 's/{{DJANGO_IMAGE_VERSION}}/${env.TAG_NAME}/g' ${DJANGO_NGINX_DOCKER_COMPOSE_FILE_PATH}"
             }
         }
         stage('Execute Ansible Playbook') {
