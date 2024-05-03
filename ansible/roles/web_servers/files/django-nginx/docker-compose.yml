@@ -3,7 +3,7 @@ version: '3'
 services:
   web_api:
     # build: ../student-django 
-    image: vinhbh/student-api-django:${DJANGO_IMAGE_VERSION}
+    image: vinhbh/student-api-django:{{DJANGO_IMAGE_VERSION}}
     container_name: web_api
     command: uwsgi --ini uwsgi.ini
     volumes:
