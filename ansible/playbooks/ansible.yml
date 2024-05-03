@@ -21,20 +21,20 @@
 - hosts: lb
   become: true
   roles:
-    - roles/haproxy
-    - roles/keepalived
+    - ./roles/haproxy
+    - ./roles/keepalived
 
 - hosts: db_servers
   become: true
   roles:
-    - roles/db_servers
+    - ./roles/db_servers
     
 - hosts: web_servers
   become: true
   roles:
-    - roles/web_servers
+    - ./roles/web_servers
 
 - hosts: web_clients
   become: true
   roles:
-    - roles/web_clients
+    - ./roles/web_clients
