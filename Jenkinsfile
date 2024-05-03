@@ -59,7 +59,7 @@ pipeline {
                 inventory: './ansible/inventory.yml', 
                 playbook: './ansible/playbooks/django_api_server.yml', 
                 vaultTmpPath: '',
-                extras: "-e web_server_name=web_server_1", 
+                extras: "-e web_server_name=web_server_1"
             }
         }
         stage('Deploy second web server') {
@@ -70,7 +70,7 @@ pipeline {
                 inventory: './ansible/inventory.yml', 
                 playbook: './ansible/playbooks/django_api_server.yml', 
                 vaultTmpPath: '',
-                extras: "-e web_server_name=web_server_2", 
+                extras: "-e web_server_name=web_server_2"
             }
         }
     }
