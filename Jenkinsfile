@@ -9,7 +9,7 @@ pipeline {
         stage('Clone') {
             steps {
                 script {
-                    echo 'Clone code from branch create-ansible-cd (trigger)'
+                    echo 'Clone code from branch create-ansible-cd (trigger v2)'
                     // Clone code from a specific branch
                     git branch: 'create-ansible-cd', url: 'https://github.com/Vinh1507/student-project'
                 }
