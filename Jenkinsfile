@@ -3,7 +3,8 @@ pipeline {
     environment {
         DOCKER_HUB_CREDENTIALS = 'dockerhub_vinhbh'
         IMAGE_NAME = 'vinhbh/student-api-django'
-        DJANGO_NGINX_DOCKER_COMPOSE_FILE_PATH = './web_servers/files/django-nginx/docker-compose.yml'
+        DJANGO_NGINX_DOCKERFILE_PATH = './ansible/roles/web_servers/files/student-django'
+        DJANGO_NGINX_DOCKER_COMPOSE_FILE_PATH = './ansible/roles/web_servers/files/django-nginx/docker-compose.yml'
     }
     stages {
         stage('Clone') {
@@ -25,7 +26,7 @@ pipeline {
                 script {
                     // docker.build('vinhbh/simple_image_jenkins:lastest', '.')
                     echo "Image version: ${env.IMAGE_NAME}:${env.TAG_NAME}"
-                    sh "docker build -t ${env.IMAGE_NAME}:${env.TAG_NAME} ./student-django"
+                    sh "docker build -t ${env.IMAGE_NAME}:${env.TAG_NAME} ${DJANGO_NGINX_DOCKERFILE_PATH}"
                 }
             }
         }
