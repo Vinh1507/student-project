@@ -24,6 +24,7 @@ pipeline {
             steps {
                 script {
                     // docker.build('vinhbh/simple_image_jenkins:lastest', '.')
+                    echo "Image version: ${env.IMAGE_NAME}:${tagVersion}"
                     sh "docker build -t ${env.IMAGE_NAME}:${tagVersion} ./student-django"
                 }
             }
