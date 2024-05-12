@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+    jenkins:
+        container_name: jenkins_container
+        build: ./
+        restart: unless-stopped
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /var/jenkins_data:/var/jenkins_home
+        ports:
+            - "8080:8080"
+            - "50000:50000"

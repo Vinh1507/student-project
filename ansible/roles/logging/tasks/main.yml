@@ -1,0 +1,26 @@
+
+- name: Remove logging directory
+  file:
+    path: /logging                
+    state: absent
+
+- name: Create directory logging  
+  file:
+    path: /logging       
+    state: directory
+    mode: '0755'
+
+- name: Copy logging-data directory
+  copy:
+    src: logging-data
+    dest: /logging  
+
+- name: Run Docker Compose Down
+  shell: sudo docker compose down
+  args:
+    chdir: /logging/logging-data
+
+- name: Run Docker Compose Up
+  shell: sudo docker compose up -d
+  args:
+    chdir: /logging/logging-data
