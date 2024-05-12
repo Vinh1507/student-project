@@ -1,0 +1,26 @@
+
+- name: Remove monitoring directory
+  file:
+    path: /monitoring                
+    state: absent
+
+- name: Create directory monitoring  
+  file:
+    path: /monitoring       
+    state: directory
+    mode: '0755'
+
+- name: Copy monitor-data directory
+  copy:
+    src: monitor-data
+    dest: /monitoring  
+
+- name: Run Docker Compose Down
+  shell: sudo docker compose down
+  args:
+    chdir: /monitoring/monitor-data
+
+- name: Run Docker Compose Up
+  shell: sudo docker compose up -d
+  args:
+    chdir: /monitoring/monitor-data

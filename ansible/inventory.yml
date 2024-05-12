@@ -6,8 +6,8 @@
 192.168.144.133
 
 [web_servers]
-192.168.144.130 name=web_server_1
-192.168.144.131 name=web_server_2
+192.168.144.135 name=web_server_1
+192.168.144.136 name=web_server_2
 
 [lb]
 192.168.144.132 config_file=keepalived_master.conf
