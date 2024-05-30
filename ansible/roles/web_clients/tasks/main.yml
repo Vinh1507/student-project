@@ -1,4 +1,15 @@
 
+- name: Check if docker-compose.yml exists
+  stat:
+    path: /web-project/student-frontend/docker-compose.yml
+  register: compose_file
+
+- name: Run Docker Compose Down
+  shell: sudo docker compose down
+  args:
+    chdir: /web-project/student-frontend
+  when: compose_file.stat.exists
+  
 - name: Remove web-project directory
   file:
     path: /web-project                
@@ -14,11 +25,6 @@
   copy:
     src: student-frontend
     dest: /web-project  
-
-- name: Run Docker Compose Down
-  shell: sudo docker compose down
-  args:
-    chdir: /web-project/student-frontend
 
 - name: Run Docker Compose Up
   shell: sudo docker compose up -d
