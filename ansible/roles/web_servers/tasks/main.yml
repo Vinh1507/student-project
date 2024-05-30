@@ -30,6 +30,11 @@
     src: docker-compose.yml.j2
     dest: /api-project/django-nginx/docker-compose.yml
 
+- name: Run Docker Compose Build
+  shell: sudo docker compose build --no-cache
+  args:
+    chdir: /api-project/django-nginx
+
 - name: Run Docker Compose Up
   shell: sudo docker compose up -d
   args:
