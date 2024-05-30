@@ -24,4 +24,5 @@ services:
       - ./logs:/var/log/nginx
   
 volumes:
+  # use same volumn at 2 containers in order to communicate socket
   django_nginx_volumn:

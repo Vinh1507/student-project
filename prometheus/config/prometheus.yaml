@@ -26,12 +26,14 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  # Example job for node_exporter
   - job_name: 'node_exporter'
     static_configs:
       - targets: ['node_exporter:9100', '192.168.144.129:9100', '192.168.144.135:9100', '192.168.144.136:9100', '192.168.144.132:9100', '192.168.144.133:9100']
 
-  # Example job for cadvisor
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080', '192.168.144.129:8999', '192.168.144.135:8999', '192.168.144.136:8999', '192.168.144.132:8999', '192.168.144.133:8999']
+  
+  - job_name: "django_exporter"
+    static_configs:
+      - targets: ["192.168.144.135:8002", "192.168.144.136:8002"]
