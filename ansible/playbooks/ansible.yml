@@ -16,7 +16,7 @@
 # - hosts: all
 #   become: true
 #   roles:
-#     - roles/common
+#     - ../roles/common
 
 - hosts: lb
   become: true

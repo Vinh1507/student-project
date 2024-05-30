@@ -1,3 +1,13 @@
+- name: Check if docker-compose.yml exists
+  stat:
+    path: /monitoring/monitor-data/docker-compose.yml
+  register: compose_file
+
+- name: Run Docker Compose Down
+  shell: sudo docker compose down
+  args:
+    chdir: /monitoring/monitor-data
+  when: compose_file.stat.exists
 
 - name: Remove monitoring directory
   file:
@@ -14,11 +24,6 @@
   copy:
     src: monitor-data
     dest: /monitoring  
-
-- name: Run Docker Compose Down
-  shell: sudo docker compose down
-  args:
-    chdir: /monitoring/monitor-data
 
 - name: Run Docker Compose Up
   shell: sudo docker compose up -d
