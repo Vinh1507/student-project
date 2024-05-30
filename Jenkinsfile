@@ -40,18 +40,7 @@ pipeline {
                 sh "docker push ${env.IMAGE_NAME}:${env.TAG_NAME}"
             }
         }
-        stage('Run Sed') {
-            steps {
-                echo 'Run sed to inject'
-                sh "sed -i 's/{{DJANGO_IMAGE_VERSION}}/${env.TAG_NAME}/g' ${DJANGO_NGINX_DOCKER_COMPOSE_FILE_PATH}"
-            }
-        }
-        // stage('Execute Ansible Playbook') {
-        //     steps {
-        //         ansiblePlaybook credentialsId: 'ansible-private-key', disableHostKeyChecking: true, installation: 'ansible2', inventory: './ansible/inventory.yml', playbook: './ansible/playbooks/ansible.yml', vaultTmpPath: ''
-        //     }
-        // }
-        stage('Deploy first web server') {
+        stage('Deploy web server') {
             steps {
                 ansiblePlaybook credentialsId: 'ansible-private-key', 
                 disableHostKeyChecking: true, 
@@ -59,18 +48,7 @@ pipeline {
                 inventory: './ansible/inventory.yml', 
                 playbook: './ansible/playbooks/django_api_server.yml', 
                 vaultTmpPath: '',
-                extras: "-e web_server_name=web_server_1"
-            }
-        }
-        stage('Deploy second web server') {
-            steps {
-                ansiblePlaybook credentialsId: 'ansible-private-key', 
-                disableHostKeyChecking: true, 
-                installation: 'ansible2', 
-                inventory: './ansible/inventory.yml', 
-                playbook: './ansible/playbooks/django_api_server.yml', 
-                vaultTmpPath: '',
-                extras: "-e web_server_name=web_server_2"
+                extras: "-t api_server -e DJANGO_IMAGE_VERSION=${env.TAG_NAME}"
             }
         }
     }
