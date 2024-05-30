@@ -17,5 +17,3 @@
     name: haproxy
     state: started
     enabled: yes
-  changed_when: true
-  notify: restart haproxy

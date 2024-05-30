@@ -31,6 +31,9 @@
     
 - hosts: web_servers
   become: true
+  tags:
+    - api_server
+  serial: 50%
   roles:
     - ../roles/web_servers
 

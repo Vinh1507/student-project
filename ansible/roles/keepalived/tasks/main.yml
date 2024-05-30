@@ -17,5 +17,3 @@
     name: keepalived
     state: started
     enabled: yes
-  changed_when: true
-  notify: restart_keepalived
