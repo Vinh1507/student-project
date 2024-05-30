@@ -25,7 +25,7 @@ pipeline {
                 script {
                     // docker.build('vinhbh/simple_image_jenkins:lastest', '.')
                     echo "Image version: ${env.IMAGE_NAME}:${env.TAG_NAME}"
-                    sh "docker build -t ${env.IMAGE_NAME}:${env.TAG_NAME} ${DJANGO_NGINX_DOCKERFILE_PATH}"
+                    sh "docker build --no-cache -t ${env.IMAGE_NAME}:${env.TAG_NAME} ${DJANGO_NGINX_DOCKERFILE_PATH}"
                 }
             }
         }
