@@ -58,6 +58,21 @@ services:
     devices:
       - dev/kmsg
 
+  blackbox_exporter:
+    image: prom/blackbox-exporter
+    restart: always
+    container_name: blackbox_exporter
+    tty: true
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}-backbox.rule=Host(`blackbox_exporter`)
+      - traefik.http.services.${COMPOSE_PROJECT_NAME}-backbox.loadbalancer.server.port=9115
+    ports:
+      - 9115:9115
+    command: --config.file=/etc/blackbox/blackbox.yml
+    volumes:
+      - ./blackbox/:/etc/blackbox/
+   
 
 volumes:
   prometheus-data:

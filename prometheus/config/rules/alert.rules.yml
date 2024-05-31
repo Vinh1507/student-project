@@ -1,11 +1,20 @@
 groups:
-- name: example
+- name: instance_alerts
   rules:
   - alert: InstanceDown
     expr: up == 0
-    for: 2m
+    for: 5m
     labels:
       severity: critical
     annotations:
-      summary: "Instance {{ $labels.instance }} down"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+      summary: "Instance {{ $labels.instance }} is down"
+      description: "Instance {{ $labels.instance }} has been down for more than 5 minutes."
+
+  - alert: HighCpuUsage
+    expr: 100 * (1 - avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[5m]))) > 80
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage detected on instance {{ $labels.instance }}"
+      description: "CPU usage is above 80% for more than 2 minutes on instance {{ $labels.instance }}."
