@@ -20,6 +20,8 @@
 
 - hosts: lb
   become: true
+  tags:
+    - lb_server
   roles:
     - ../roles/haproxy
     - ../roles/keepalived

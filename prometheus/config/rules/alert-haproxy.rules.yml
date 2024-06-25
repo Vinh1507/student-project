@@ -1,0 +1,10 @@
+groups:
+- name: be_servers_alert
+  rules:
+  - alert: be_servers_no_backends
+    expr: haproxy_backend_active_servers{proxy="http_student_api_be"} < 1
+    for: 15s
+    labels:
+      severity: page      
+    annotations:
+      summary: HAProxy reports all servers are unhealthy for be_app.

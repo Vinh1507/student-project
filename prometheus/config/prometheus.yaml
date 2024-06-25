@@ -53,3 +53,7 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: "blackbox_exporter:9115"
+    
+  - job_name: "haproxy_exporter"
+    static_configs:
+      - targets: ["192.168.144.132:8404", "192.168.144.133:8404"]

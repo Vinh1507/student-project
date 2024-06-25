@@ -18,7 +18,12 @@
   roles:
     - ../roles/logging_web
 
-- hosts: logging_server
+- hosts: web_servers
   become: true
   roles:
-    - ../roles/logging_server
+    - ../roles/logging_api
+
+# - hosts: logging_server
+#   become: true
+#   roles:
+#     - ../roles/logging_server
